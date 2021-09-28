@@ -1,6 +1,4 @@
-package com.tdx.gui.util;
-
-import java.io.File;
+package com.tdx.scgui.utils;
 
 public class CommandUtil {
 

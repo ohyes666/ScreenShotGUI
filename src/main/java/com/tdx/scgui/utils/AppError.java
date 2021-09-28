@@ -1,4 +1,4 @@
-package com.tdx.gui.util;
+package com.tdx.scgui.utils;
 
 /**
  * 内部error

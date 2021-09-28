@@ -1,4 +1,4 @@
-package com.tdx.gui.impl;
+package com.tdx.scgui.impl;
 
 public interface CommonDataCallBack<T> {
     void onSuccess(T data);

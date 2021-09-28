@@ -1,9 +1,7 @@
-package com.tdx.gui;
+package com.tdx.scgui.ui;
 
-import com.tdx.gui.impl.CommonDataCallBack;
-import com.tdx.gui.util.AdbUtil;
-import com.tdx.gui.util.CommandUtil;
-import jdk.nashorn.api.scripting.JSObject;
+import com.tdx.scgui.impl.CommonDataCallBack;
+import com.tdx.scgui.utils.AdbUtil;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -13,39 +11,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 
-public class Main extends JFrame {
-
-    public static void main(String[] args) {
-        // 显示应用 GUI
-        javax.swing.SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                Main main = new Main();
-            }
-        });
-        AdbUtil.getInstance().init();
-    }
-
+public class Main extends JPanel {
     public Main() {
-        setTitle("ADB Tools");
-        setSize(600, 500);
-        setLocationRelativeTo(null);
-        // 创建 JFrame 实例
-        JFrame frame = new JFrame("ADB Tools");
-        // Setting the width and height of frame
-        frame.setSize(600, 500);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLocationRelativeTo(null);
-
-
-        JPanel panel = new JPanel();
-        frame.add(panel);
-        placeComponents(panel);
-        frame.setVisible(true);
+        initView(this);
     }
 
-    private void placeComponents(JPanel panel) {
+
+    private void initView(JPanel panel) {
         panel.setLayout(null);
 
         JLabel userLabel = new JLabel("设备列表");
@@ -200,6 +173,4 @@ public class Main extends JFrame {
         });
 
     }
-
-
 }
