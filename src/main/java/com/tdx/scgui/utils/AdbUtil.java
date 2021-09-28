@@ -1,6 +1,9 @@
-package com.tdx.gui.util;
+package com.tdx.scgui.utils;
 
-import com.tdx.gui.impl.CommonDataCallBack;
+
+import com.tdx.scgui.impl.CommonDataCallBack;
+
+import java.io.File;
 
 /**
  * ADB 单例工具类
@@ -40,8 +43,29 @@ public class AdbUtil {
      */
     public void init() {
         mRuntime = Runtime.getRuntime();
-        //todo adb先用环境变量中的。之后改成自带
-        mAdbPath = "adb";
+        mAdbPath = initAdbPath();
+    }
+
+    /**
+     * 初始化ADB路径 优先使用Android环境中的adb 其次是用项目包中的adb  以上都没有 就直接使用adb 当作环境变量配置好了。
+     *
+     * @return ADB路径
+     */
+    private String initAdbPath() {
+        String adbPath = "";
+        String android_home = System.getenv("ANDROID_HOME");
+        if (android_home != null) {
+            adbPath = android_home + File.separator + "platform-tools" + File.separator + "adb";
+        } else {
+            File builtADB = new File("res/adb");
+            if (builtADB.isDirectory() && builtADB.exists()) {
+                String osDir = Util.getOsDir();
+                adbPath = "res/adb/" + osDir + "/adb";
+            } else {
+                adbPath = "adb";
+            }
+        }
+        return adbPath;
     }
 
     public void createFolderMobile() {
