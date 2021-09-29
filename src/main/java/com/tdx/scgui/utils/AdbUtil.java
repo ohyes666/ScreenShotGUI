@@ -16,9 +16,6 @@ public class AdbUtil {
     private final String mScreenShotPathMobile = "/sdcard/Pictures/screen_shots/";
     private final String mScreenCachePathMobile = mScreenShotPathMobile + "cache/";
 
-    //电脑中截图输出目录
-    private String mOutPath;
-
     private Runtime mRuntime;
     private String mAdbPath;
 
@@ -141,12 +138,12 @@ public class AdbUtil {
         if (shotName == null || shotName.length() == 0) {
             return AppError.EMPTY_FILE_NAME;
         }
-        if (mOutPath == null || mOutPath.length() == 0) {
+        if (getOutPath() == null || getOutPath().length() == 0) {
             return AppError.EMPTY_OUT_PATH;
         }
         try {
             CommandUtil.screenshot(shotName, mScreenShotPathMobile, mAdbPath, mRuntime);
-            CommandUtil.pullScreenshot(mScreenShotPathMobile + shotName, mOutPath, mAdbPath, mRuntime);
+            CommandUtil.pullScreenshot(mScreenShotPathMobile + shotName, getOutPath(), mAdbPath, mRuntime);
         } catch (Exception e) {
             e.printStackTrace();
             error = AppError.UN_KNOW;
@@ -154,11 +151,7 @@ public class AdbUtil {
         return error;
     }
 
-    public void setOutPath(String outPath) {
-        this.mOutPath = outPath;
-    }
-
     public String getOutPath() {
-        return mOutPath;
+        return Setting.getInstance().getOutPutPath();
     }
 }

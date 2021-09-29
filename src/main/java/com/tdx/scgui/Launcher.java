@@ -1,13 +1,15 @@
 package com.tdx.scgui;
 
 
-import com.tdx.scgui.i18n.StringManager;
-import com.tdx.scgui.i18n.StringManagerFactory;
 import com.tdx.scgui.ui.Main;
 import com.tdx.scgui.ui.Menu;
 import com.tdx.scgui.utils.AdbUtil;
+import com.tdx.scgui.utils.Setting;
 
 import javax.swing.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Properties;
 
 
 public class Launcher extends JFrame {
@@ -17,6 +19,7 @@ public class Launcher extends JFrame {
         // 显示应用 GUI
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
+                Setting.getInstance().init();
                 Launcher main = new Launcher();
             }
         });

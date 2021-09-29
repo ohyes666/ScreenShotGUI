@@ -2,6 +2,8 @@ package com.tdx.scgui.ui;
 
 import com.tdx.scgui.impl.CommonDataCallBack;
 import com.tdx.scgui.utils.AdbUtil;
+import com.tdx.scgui.utils.AppError;
+import com.tdx.scgui.utils.Setting;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -112,7 +114,13 @@ public class Main extends JPanel {
         outPath.setBounds(250, 150, 100, 25);
         panel.add(outPath);
 
-        JLabel outPathTip = new JLabel("选择截图输出目录");
+        String pathLabel = "选择截图输出目录";
+        String settingOutPath = Setting.getInstance().getOutPutPath();
+        if (settingOutPath != null && settingOutPath.length() > 0) {
+            pathLabel = settingOutPath;
+        }
+
+        JLabel outPathTip = new JLabel(pathLabel);
         outPathTip.setBounds(355, 150, 200, 25);
         panel.add(outPathTip);
 
@@ -129,7 +137,7 @@ public class Main extends JPanel {
                     String path = chooser.getSelectedFile().getAbsolutePath();
                     System.out.println("out Path = " + path);
                     outPathTip.setText(path);
-                    AdbUtil.getInstance().setOutPath(path);
+                    Setting.getInstance().changeOutPutPath(path);
                 }
             }
         });
